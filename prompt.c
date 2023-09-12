@@ -6,11 +6,15 @@
  */
 char *display_prompt(void)
 {
+	char *prompt = "#cisfun$ ";
 	char *user_Response;
 	size_t len = 0;
 	ssize_t nchars_read;
 
-	_puts("> ");
+	if (isatty(STDIN_FILENO))
+	{
+		_puts(prompt);
+	}
 	nchars_read = getline(&user_Response, &len, stdin);
 
 	if (nchars_read == -1 ? (perror("getline"), free(user_Response), 1) : 0)

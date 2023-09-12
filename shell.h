@@ -15,7 +15,7 @@
 void _puts(const char *str);
 int _putchar(char c);
 int execute(char **args);
-char **parse_iput(char *user_Response);
+char **parse_input(char *user_Response);
 char *display_prompt(void);
 
 

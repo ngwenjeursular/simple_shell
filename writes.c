@@ -12,7 +12,6 @@ void _puts(const char *str)
 		_putchar(*str);
 		str++;
 	}
-	_putchar('\n');
 }
 
 /**
