@@ -17,6 +17,7 @@ int _putchar(char c);
 int execute(char **args);
 char **parse_input(char *user_Response);
 char *display_prompt(void);
-
+void interactive_mode(void);
+void non_interactive_mode(void);
 
 #endif
