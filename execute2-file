@@ -1,0 +1,80 @@
+#include "shell.h"
+
+/**
+ * execute - executes a command
+ * @args: double pointer to the arguments
+ * Return: Nothing
+ */
+
+void execute(char **args)
+{
+	pid_t pid, wpid;
+	bool foundCommand = false, isFullPathCommand = false;
+	int status;
+	char path_with_command[MAX_PATH_LENGTH];
+	char *dir, *path, path_copy[MAX_PATH_LENGTH];
+
+	if (strchr(args[0], '/') != NULL)
+	{
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+		isFullPathCommand = true;
+	}
+	else
+	{
+		path = get_env_variable("PATH");
+		if (path == NULL)
+		{
+			perror("getenv");
+			exit(EXIT_FAILURE);
+		}
+		strncpy(path_copy, path, sizeof(path_copy));
+		dir = strtok(path_copy, ":");
+		while (dir != NULL)
+		{
+			if (parse_path(path_with_command, dir, args[0]) == NULL)
+			{
+				perror("Command path too long");
+				exit(EXIT_FAILURE);
+			}
+			if (access(path_with_command, X_OK) == 0)
+			{
+				pid = fork();
+				if (pid == 0)
+				{
+					if (execve(path_with_command, args, NULL) == -1)
+					{
+						perror("execve");
+						exit(EXIT_FAILURE);
+					}
+				}
+				else if (pid < 0)
+				{
+					perror("fork");
+					exit(EXIT_FAILURE);
+				}
+				else
+				{
+					do {
+						wpid = waitpid(pid, &status, WUNTRACED);
+					} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+					if (wpid == -1)
+					{
+						perror("waitpid");
+						exit(EXIT_FAILURE);
+					}
+					foundCommand = true;
+				}
+			}
+			dir = strtok(NULL, ":");
+		}
+		if (!foundCommand && !isFullPathCommand)
+		{
+			_puts(args[0]);
+			_puts(": command not found\n");
+		}
+	}
+}
