@@ -7,9 +7,14 @@
 
 int main(void)
 {
+	bool isShellRunning = true;
+
 	if (isatty(STDIN_FILENO))
 	{
-		interactive_mode();
+		while (isShellRunning)
+		{
+			interactive_mode();
+		}
 	}
 	else
 	{

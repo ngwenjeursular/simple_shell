@@ -1,0 +1,22 @@
+#include "shell.h"
+/**
+ * _getenv - customize version of getenv
+ * @env_name: name of the env
+ * Return: pointer to a char
+ */
+
+char *_getenv(const char *env_name)
+{
+	char *value = NULL;
+	char **env = environ;
+
+	for (; *env != NULL; env++)
+	{
+		if (strncmp(*env, env_name, strlen(env_name)) == 0)
+		{
+			value = strchr(*env, '=') + 1;
+			break;
+		}
+	}
+	return (value);
+}

@@ -7,7 +7,8 @@
 
 void interactive_mode(void)
 {
-	char *user_Response, **args;
+	char *user_Response;
+	char **args;
 
 	while (true)
 	{
@@ -20,7 +21,11 @@ void interactive_mode(void)
 			free(args);
 			continue;
 		}
-		execute(args);
+		if (user_Response[strlen(user_Response) - 1] == '\n')
+			user_Response[strlen(user_Response) - 1] = '\0';
+
+		if (!handle_builtin(args))
+			execute(args);
 
 		free(user_Response);
 		free(args);
