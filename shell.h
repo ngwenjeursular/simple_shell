@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #include <stdio.h>
+#include <limits.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -35,5 +36,11 @@ void execute_command(char **args);
 void execute_full_path(char **args);
 void execute_in_path(char **args);
 void wait_for_child(pid_t pid, int *status);
+
+void my_setenv(const char *name, const char *value);
+void my_unsetenv(const char *name);
+void change_dir(char **args);
+int handle_setenv(char **args);
+int handle_unsetenv(char **args);
 
 #endif

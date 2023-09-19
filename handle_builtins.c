@@ -28,5 +28,18 @@ int handle_builtin(char **args)
 		print_environment();
 		return (1);
 	}
+	else if (strcmp(args[0], "my_setenv") == 0)
+	{
+		return (handle_setenv(args));
+	}
+	else if (strcmp(args[0], "my_unsetenv") == 0)
+	{
+		return (handle_unsetenv(args));
+	}
+	else if (strcmp(args[0], "cd") == 0)
+	{
+		change_dir(args);
+		return (1);
+	}
 	return (0);
 }
