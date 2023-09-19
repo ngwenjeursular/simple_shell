@@ -6,7 +6,7 @@
 */
 char *_getline()
 {
-	int i, bufferSize = BUFSIZE, readCount;
+	int i, bufferSize = BUFSIZ, readCount;
 	char currentChar = 0;
 	char *inputBuffer;
 
@@ -42,7 +42,7 @@ char *_getline()
 		}
 	}
 	inputBuffer[i] = '\0';
-	hastag_handle(inputBuffer);
+	hashtag_handle(inputBuffer);
 	return (inputBuffer);
 }
 

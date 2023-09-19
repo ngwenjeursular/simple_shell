@@ -6,7 +6,7 @@
 * Return: A dynamically allocated string containing the input line, or
 * NULL on error or EOF
 */
-char *_getline(FILE *fp)
+char *_getline2(FILE *fp)
 {
 	char *line = NULL;
 	size_t len = 0;

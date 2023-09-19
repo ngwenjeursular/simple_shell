@@ -56,7 +56,7 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 
 	if (ptr == NULL)
 	{
-		memset(reult, 0, new_size);
+		memset(result, 0, new_size);
 		free(ptr);
 	} else
 	{
@@ -80,7 +80,7 @@ char *_memcpy(char *dest, const char *src, size_t n)
 
 	for (i = 0; i < n; i++)
 	{
-		dest[i] = scr[i];
+		dest[i] = src[i];
 	}
 	return (dest);
 }
