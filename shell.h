@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+
 #include <stdio.h>
 #include <limits.h>
 #include <unistd.h>
@@ -14,6 +15,7 @@
 
 #define MAX_NO_ARGS 64
 #define MAX_PATH_LENGTH 1024
+#define BUFFER_SIZE 1024
 
 void _puts(const char *str);
 int _putchar(char c);
@@ -42,5 +44,22 @@ void my_unsetenv(const char *name);
 void change_dir(char **args);
 int handle_setenv(char **args);
 int handle_unsetenv(char **args);
+
+/* memory management.c */
+void *fill_an_array(void *a, int el, size_t len);
+void free_all(char **cmd, char *line);
+void *_calloc(size_t size);
+char *_memcpy(char *dest, const char *src, size_t n);
+void *_realloc(void *ptr, size_t old_size, size_t new_size);
+
+/* _strtok.c */
+int split_line(char *line, char delim, char *tokens[], int max_tokens);
+
+/* getline */
+char *_getline(FILE *fp);
+char *_getline(void);
+
+/* hashtag handle */
+void hashtag_handle(char *inputString);
 
 #endif
