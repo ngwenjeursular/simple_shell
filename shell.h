@@ -88,7 +88,6 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size);
 int split_line(char *line, char delim, char *tokens[], int max_tokens);
 
 /* getline */
-/*char *_getline(FILE *fp);*/
 char *_getline(void);
 
 /* hashtag handle */
