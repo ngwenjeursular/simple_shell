@@ -19,7 +19,7 @@ void execute(char **args)
 	else if (pid < 0)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	else
 	{

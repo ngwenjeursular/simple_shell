@@ -18,6 +18,6 @@ void wait_for_child(pid_t pid, int *status)
 	if (wpid == -1)
 	{
 		perror("waitpid");
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 }

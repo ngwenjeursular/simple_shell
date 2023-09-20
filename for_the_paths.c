@@ -22,10 +22,10 @@ void execute_command(char **args)
 
 void execute_full_path(char **args)
 {
-	if (execve(args[0], args, NULL) == -1)
+	if (execve(args[0], args, environ) == -1)
 	{
 		perror("execve");
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 }
 
@@ -41,12 +41,12 @@ void execute_in_path(char **args)
 	char path_copy[MAX_PATH_LENGTH];
 	char path_with_command[MAX_PATH_LENGTH];
 	char *dir;
+	int cmd_not_found = 1;
 
 
-	if (path == NULL)
+	if (path == NULL || *path == '\0')
 	{
-		perror("getenv");
-		exit(EXIT_FAILURE);
+		path = ".";
 	}
 	strncpy(path_copy, path, sizeof(path_copy));
 	dir = strtok(path_copy, ":");
@@ -55,19 +55,25 @@ void execute_in_path(char **args)
 		if (parse_path(path_with_command, dir, args[0]) == NULL)
 		{
 			perror("command path too long");
-			exit(EXIT_FAILURE);
+			exit(127);
 		}
 		if (access(path_with_command, X_OK) == 0)
 		{
-			if (execve(path_with_command, args, NULL) == -1)
+			if (execve(path_with_command, args, environ) == -1)
 			{
 				perror("execve");
-				exit(EXIT_FAILURE);
+				exit(127);
 			}
+			cmd_not_found = 0;
 		}
 		dir = strtok(NULL, ":");
 	}
-	_puts(args[0]);
-	_puts(": command not found\n");
-	exit(EXIT_FAILURE);
+	if (cmd_not_found)
+	{
+		_puts("./hsh: ");
+		_puts("1: ");
+		_puts(args[0]);
+		_puts(": not found\n");
+		exit(127);
+	}
 }
