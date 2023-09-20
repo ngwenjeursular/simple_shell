@@ -1,21 +1,27 @@
-/**
-* _strcmp - compare the first string with second string.
-* @s1: shows first string
-* @s2: shows second string
-* Return: 0 if they are equal, another number if not
-*/
-int _strcmp(char *s1, char *s2)
-{
-	int i = 0, cp = 0;
+#include "shell.h"
 
-	while (cp == 0)
+/**
+ * _strncmp - Compare Amount (n) Of Characters Of Two Strings.
+ * @s1: A String.
+ * @s2: A String.
+ * @n: Amount Of Characters To Compare.
+ *
+ * Return: 1 If The Strings, Otherwise 0
+ */
+int _strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
+
+	if (s1 == NULL)
+		return (-1);
+	for (i = 0; i < n && s2[i]; i++)
 	{
-		if ((*(s1 + i) == '\0') && (*(s2 + i) == '\0'))
-			break;
-		cp = *(s1 + i) - *(s2 + i);
-		i++;
+		if (s1[i] != s2[i])
+		{
+			return (1);
+		}
 	}
-	return (cp);
+	return (0);
 }
 
 /**
