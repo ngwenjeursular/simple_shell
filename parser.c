@@ -16,7 +16,7 @@ char **parse_input(char *user_Response)
 	if (args == NULL)
 	{
 		perror("memory allocation err");
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
 	token = strtok(user_Response, delimiters);
 
@@ -26,7 +26,7 @@ char **parse_input(char *user_Response)
 		if (args[no_of_args] == NULL)
 		{
 			perror("memory allocation failed");
-			exit(127);
+			exit(EXIT_FAILURE);
 		}
 		no_of_args++;
 
@@ -37,7 +37,7 @@ char **parse_input(char *user_Response)
 			if (args == NULL)
 			{
 				perror("mem allocation error");
-				exit(127);
+				exit(EXIT_FAILURE);
 			}
 		}
 		token = strtok(NULL, delimiters);

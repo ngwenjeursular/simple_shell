@@ -25,7 +25,7 @@ void execute_full_path(char **args)
 	if (execve(args[0], args, environ) == -1)
 	{
 		perror("execve");
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -55,14 +55,14 @@ void execute_in_path(char **args)
 		if (parse_path(path_with_command, dir, args[0]) == NULL)
 		{
 			perror("command path too long");
-			exit(127);
+			exit(EXIT_FAILURE);
 		}
 		if (access(path_with_command, X_OK) == 0)
 		{
 			if (execve(path_with_command, args, environ) == -1)
 			{
 				perror("execve");
-				exit(127);
+				exit(EXIT_FAILURE);
 			}
 			cmd_not_found = 0;
 		}
