@@ -5,21 +5,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 
-#define MAX_INPUT_SIZE 1024
-
 extern char **environ;
+#define MAX_COMMAND_LENGTH 100
 
 /**
-* struct Shell - A structure to hold shell -related data
-* @input: Array to store user input
+* struct Shell - A structure to represent the shell and its command.
+* @command: The command entered by the user.
 */
 struct Shell
 {
-	char input[MAX_INPUT_SIZE];
+	char command[MAX_COMMAND_LENGTH];
 };
 
+void initialize_shell(struct Shell *shell);
 void display_prompt(void);
 void read_user_input(struct Shell *shell);
 void execute_command(struct Shell *shell);
