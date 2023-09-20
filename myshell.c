@@ -1,115 +1,115 @@
 #include "main.h"
 
 /**
-* initialize_shell - Initializes the shell structure.
-* @shell: Pointer to the Shell structure.
+* initialize_shell - Initializes the shell environment.
+* @env: Pointer to the shell environment struct.
 * Return: no return.
 */
-void initialize_shell(struct Shell *shell)
+void initialize_shell(ShellEnvironment *env)
 {
-	memset(shell->command, 0, sizeof(shell->command));
+	env->bufsize = 0;
+	env->buffer = NULL;
 }
 
 /**
-* display_prompt - Display the shell prompt.
-*
+* cleanup_shell - Cleans up the shell environment.
+* @env: Pointer to the shell environment struct.
 * Return: no return.
+*/
+void cleanup_shell(ShellEnvironment *env)
+{
+	if (env->buffer != NULL)
+	{
+		free(env->buffer);
+	}
+}
+
+/**
+* display_prompt - Displays the shell prompt.
+*
+* Return: nothing.
 */
 void display_prompt(void)
 {
-	printf("#cisfun$ ");
+	_putchar('#');
+	_putchar(' ');
+	_putchar('c');
+	_putchar('i');
+	_putchar('s');
+	_putchar('f');
+	_putchar('u');
+	_putchar('n');
+	_putchar('$');
+	_putchar(' ');
+}
+/**
+* read_input - Reads a line of input from the user.
+* @env: Pointer to the shell environment struct.
+* Return: 0 on success, -1 on error.
+*/
+int read_input(ShellEnvironment *env)
+{
+	ssize_t line_size;
+
+	line_size = getline(&(env->buffer), &(env->bufsize), stdin);
+
+	if (line_size == -1)
+	{
+		if (feof(stdin))
+		{
+			cleanup_shell(env);
+
+			if (isatty(STDIN_FILENO))
+			{
+				_putchar('\n');
+			}
+			return (-1);
+		}
+		perror("getline");
+		return (-1);
+	}
+
+	if (env->buffer[line_size - 1] == '\n')
+		env->buffer[line_size - 1] = '\0';
+
+	return (0);
 }
 
 /**
-* read_user_input - Read user input into the shell structure.
-* @shell: Pointer to the Shell structure.
-*
-* Return: no return.
+* execute_command - Executes a command entered by the user.
+* @env: Pointer to the shell environment struct.
+* Return: 0 on success, -1 on error.
 */
-void read_user_input(struct Shell *shell)
+int execute_command(ShellEnvironment *env)
 {
-	size_t len;
+	pid_t pid = fork();
 
-	if (fgets(shell->command, sizeof(shell->command), stdin) == NULL)
+	if (pid == -1)
 	{
-		printf("\n");
-		exit(EXIT_SUCCESS);
+		perror("Error");
+		return (-1);
 	}
-
-	len = strlen(shell->command);
-
-	if (len > 0 && shell->command[len - 1] == '\n')
+	else if (pid == 0)
 	{
-		shell->command[len - 1] = '\0';
-	}
-}
+		char **argv = (char **)malloc(sizeof(char *) * 2);
 
-/**
-* execute_command - Execute the user's command.
-* @shell: Pointer to the Shell structure.
-*
-* Return: no return.
-*/
-void execute_command(struct Shell *shell)
-{
-	char **args;
-	pid_t child_pid;
-
-	if (strcmp(shell->command, "exit") == 0)
-	{
-		exit(EXIT_SUCCESS);
-	}
-
-	child_pid = fork();
-
-	if (child_pid < 0)
-	{
-		perror("Fork failed");
-		return;
-	} else if (child_pid == 0)
-	{
-		args = malloc(3 *sizeof(char *));
-
-		if (args == NULL)
+		if (argv == NULL)
 		{
-			perror("Memory allocation failed");
+			perror("Error");
 			exit(EXIT_FAILURE);
 		}
 
-		args[0] = shell->command;
-		args[1] = NULL;
-		args[2] = NULL;
+		argv[0] = env->buffer;
+		argv[1] = NULL;
 
-		if (execve(shell->command, args, environ) == -1)
-		{
-			perror("Command not found");
-			exit(EXIT_FAILURE);
-		}
-	} else
+		execve(env->buffer, argv, environ);
+		return (-1);
+	}
+	else
 	{
 		int status;
 
-		waitpid(child_pid, &status, 0);
+		waitpid(pid, &status, 0);
+		return (0);
 	}
-}
-
-/**
-* main - Entry point of the shell.
-* @argc: Argument count (unused).
-* @argv: Argument vector (unused).
-* Return: Always 0.
-*/
-int main(void)
-{
-	struct Shell shell;
-
-	while (1)
-	{
-		initialize_shell(&shell);
-		display_prompt();
-		read_user_input(&shell);
-		execute_command(&shell);
-	}
-
-	return (0);
 }

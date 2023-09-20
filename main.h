@@ -5,23 +5,26 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
+#include <stddef.h>
 #include <sys/wait.h>
 
 extern char **environ;
-#define MAX_COMMAND_LENGTH 100
 
 /**
-* struct Shell - A structure to represent the shell and its command.
-* @command: The command entered by the user.
+* struct ShellEnvironment - Represents the shell environment.
+* @buffer: Pointer to a character buffer for storing user input.
+* @bufsize: The size of the buffer.
 */
-struct Shell
+typedef struct ShellEnvironment
 {
-	char command[MAX_COMMAND_LENGTH];
-};
+	char *buffer;
+	size_t bufsize;
+} ShellEnvironment;
 
-void initialize_shell(struct Shell *shell);
+int _putchar(char c);
+void initialize_shell(ShellEnvironment *env);
+void cleanup_shell(ShellEnvironment *env);
 void display_prompt(void);
-void read_user_input(struct Shell *shell);
-void execute_command(struct Shell *shell);
+int read_input(ShellEnvironment *env);
+int execute_command(ShellEnvironment *env);
 #endif
