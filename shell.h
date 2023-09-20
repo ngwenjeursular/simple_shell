@@ -82,7 +82,7 @@ void *fill_an_array(void *a, int el, size_t len);
 void free_all(char **cmd, char *line);
 void *_calloc(size_t size);
 char *_memcpy(char *dest, const char *src, size_t n);
-void *_realloc(void *ptr, size_t old_size, size_t new_size);
+void *_realloc(void *ptr, size_t new_size);
 
 /* _strtok.c */
 int split_line(char *line, char delim, char *tokens[], int max_tokens);
@@ -92,5 +92,25 @@ char *_getline(void);
 
 /* hashtag handle */
 void hashtag_handle(char *inputString);
+
+/*more_fun.c*/
+char *_strcat(char *dest, const char *src);
+char *_strcpy(char *dest, const char *src);
+char *_strchr(char *s, char c);
+int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
+
+/*more_mychar_fun.c*/
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _isalpha(int c);
+void reverse_array(char *a, int n);
+int intlen(int num);
+char *_itoa(unsigned int n);
+
+/*mychar_fun.c*/
+char *_strncpy(char *dest, char *src, int n);
+int _strlen(const char *s);
+int _atoi(char *s);
+void *_memset(void *dest, int value, size_t n);
 
 #endif

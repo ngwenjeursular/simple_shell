@@ -21,8 +21,8 @@ void interactive_mode(void)
 			free(args);
 			continue;
 		}
-		if (user_Response[strlen(user_Response) - 1] == '\n')
-			user_Response[strlen(user_Response) - 1] = '\0';
+		if (user_Response[_strlen(user_Response) - 1] == '\n')
+			user_Response[_strlen(user_Response) - 1] = '\0';
 
 		if (!handle_builtin(args))
 			execute(args);

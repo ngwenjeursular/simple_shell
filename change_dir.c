@@ -14,7 +14,7 @@ void change_dir(char **args)
 	{
 		new_dir = home;
 	}
-	else if (strcmp(args[1], "-") == 0)
+	else if (_strcmp(args[1], "-") == 0)
 	{
 		new_dir = get_env_variable("OLDPWD");
 	}

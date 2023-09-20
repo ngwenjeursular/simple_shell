@@ -25,7 +25,7 @@ void *_calloc(size_t size)
 	if (block == NULL)
 		return (NULL);
 
-	memset(block, 0, size);
+	_memset(block, 0, size);
 	return (block);
 }
 
@@ -36,12 +36,9 @@ void *_calloc(size_t size)
 * @new_size: New size of the memory block.
 * Return: A pointer to the reallocated memory block.
 */
-void *_realloc(void *ptr, size_t old_size, size_t new_size)
+void *_realloc(void *ptr, size_t new_size)
 {
 	void *result;
-
-	if (new_size == old_size)
-		return (ptr);
 
 	if (new_size == 0 && ptr)
 	{
@@ -54,15 +51,12 @@ void *_realloc(void *ptr, size_t old_size, size_t new_size)
 	if (result == NULL)
 		return (NULL);
 
-	if (ptr == NULL)
+	if (ptr != NULL)
 	{
-		memset(result, 0, new_size);
-		free(ptr);
-	} else
-	{
-		memcpy(result, ptr, old_size);
+		_memcpy(result, ptr, new_size);
 		free(ptr);
 	}
+
 
 	return (result);
 }

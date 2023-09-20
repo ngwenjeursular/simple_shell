@@ -10,15 +10,15 @@
  */
 char *parse_path(char *path, char *dir, char *command)
 {
-	size_t dir_len = strlen(dir);
-	size_t command_len = strlen(command);
+	size_t dir_len = _strlen(dir);
+	size_t command_len = _strlen(command);
 
 	if (dir_len + command_len + 2 > MAX_PATH_LENGTH)
 		return (NULL);
 
-	strcpy(path, dir);
-	strcpy(path + dir_len, "/");
-	strcpy(path + dir_len + 1, command);
+	_strcpy(path, dir);
+	_strcpy(path + dir_len, "/");
+	_strcpy(path + dir_len + 1, command);
 
 	return (path);
 }

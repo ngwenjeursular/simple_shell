@@ -7,7 +7,7 @@
 */
 void initialize_shell(struct Shell *shell)
 {
-	memset(shell->command, 0, sizeof(shell->command));
+	_memset(shell->command, 0, sizeof(shell->command));
 }
 
 /**
@@ -36,7 +36,7 @@ void read_user_input(struct Shell *shell)
 		exit(EXIT_SUCCESS);
 	}
 
-	len = strlen(shell->command);
+	len = _strlen(shell->command);
 
 	if (len > 0 && shell->command[len - 1] == '\n')
 	{
@@ -55,7 +55,7 @@ void execute_command(struct Shell *shell)
 	char **args;
 	pid_t child_pid;
 
-	if (strcmp(shell->command, "exit") == 0)
+	if (_strcmp(shell->command, "exit") == 0)
 	{
 		exit(EXIT_SUCCESS);
 	}
