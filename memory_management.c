@@ -38,6 +38,8 @@ void *_calloc(size_t size)
 void *_realloc(void *ptr, size_t new_size)
 {
 	void *result;
+	size_t old_size;
+	size_t copy_size;
 
 	if (new_size == 0 && ptr)
 	{
@@ -52,7 +54,9 @@ void *_realloc(void *ptr, size_t new_size)
 
 	if (ptr != NULL)
 	{
-		_memcpy(result, ptr, new_size);
+		old_size = sizeof(char *) * MAX_NO_ARGS;
+		copy_size = old_size < new_size ? old_size : new_size;
+		_memcpy(result, ptr, copy_size);
 		free(ptr);
 	}
 

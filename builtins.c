@@ -71,6 +71,7 @@ void my_setenv(const char *name, const char *value)
 	{
 		if (_strncmp(name, en[i], _strlen(name)) == 0 && en[i][_strlen(name)] == '=')
 		{
+			free(en[i]);
 			en[i] = _strdup(new_env);
 			if (en[i] == NULL)
 			{

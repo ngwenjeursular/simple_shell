@@ -7,7 +7,7 @@
 
 void non_interactive_mode(void)
 {
-	char *user_Response;
+	char *user_Response = NULL;
 	char **args;
 	size_t input_line_size = 0;
 	ssize_t nchars_read;
