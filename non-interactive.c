@@ -8,9 +8,10 @@
 void non_interactive_mode(void)
 {
 	char *user_Response = NULL;
-	char **args;
+	char **args = NULL;
 	size_t input_line_size = 0;
 	ssize_t nchars_read;
+	int i;
 
 	while ((nchars_read = getline(&user_Response, &input_line_size, stdin)) != -1)
 	{
@@ -22,6 +23,7 @@ void non_interactive_mode(void)
 		if (args[0] == NULL)
 		{
 			free(args);
+			free(user_Response);
 			continue;
 		}
 
@@ -29,4 +31,8 @@ void non_interactive_mode(void)
 		free(args);
 	}
 	free(user_Response);
+	for (i = 0; i < **args; i++)
+	{
+		free(args[i]);
+	}
 }

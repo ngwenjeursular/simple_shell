@@ -8,27 +8,31 @@
 char **parse_input(char *user_Response)
 {
 	char **args = malloc(sizeof(char *) * MAX_NO_ARGS);
-	int max_args = MAX_NO_ARGS;
 	char *delimiters = " \n\t,;";
 	char *token;
-	int no_of_args = 0;
+	int no_of_args = 0, max_args = MAX_NO_ARGS;
 
 	if (args == NULL)
 	{
+		free(args);
 		perror("memory allocation err");
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(user_Response, delimiters);
-
 	while (token != NULL)
 	{
 		args[no_of_args] = strdup(token);
 		if (args[no_of_args] == NULL)
 		{
+			free(args);
 			perror("memory allocation failed");
 			exit(EXIT_FAILURE);
 		}
 		no_of_args++;
+		if (no_of_args > 1)
+		{
+			free(args[no_of_args - 2]);
+		}
 		if (no_of_args >= max_args)
 		{
 			max_args += MAX_NO_ARGS;

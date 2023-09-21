@@ -24,6 +24,7 @@ int _putchar(char c);
 
 /*parser.c*/
 char **parse_input(char *user_Response);
+void free_args(char **args);
 
 /*prompt.c*/
 char *display_prompt(void);
