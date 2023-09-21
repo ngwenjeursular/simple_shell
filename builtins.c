@@ -49,7 +49,7 @@ void my_setenv(const char *name, const char *value)
 {
 	char *new_env;
 	size_t new_env_len;
-	char **env = environ;
+	char **en = environ;
 	int i;
 
 	if (name == NULL || value == NULL)
@@ -67,12 +67,12 @@ void my_setenv(const char *name, const char *value)
 	_strcpy(new_env, name);
 	_strcat(new_env, "=");
 	_strcat(new_env, value);
-	for (i = 0; env[i] != NULL; i++)
+	for (i = 0; en[i] != NULL; i++)
 	{
-		if (_strncmp(name, env[i], _strlen(name)) == 0 && env[i][_strlen(name)] == '=')
+		if (_strncmp(name, en[i], _strlen(name)) == 0 && en[i][_strlen(name)] == '=')
 		{
-			env[i] = _strdup(new_env);
-			if (env[i] == NULL)
+			en[i] = _strdup(new_env);
+			if (en[i] == NULL)
 			{
 				_puts("Memory allocation error\n");
 			}

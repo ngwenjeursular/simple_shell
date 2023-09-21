@@ -29,7 +29,6 @@ char **parse_input(char *user_Response)
 			exit(EXIT_FAILURE);
 		}
 		no_of_args++;
-
 		if (no_of_args >= max_args)
 		{
 			max_args += MAX_NO_ARGS;

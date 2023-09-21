@@ -32,7 +32,6 @@ void *_calloc(size_t size)
 /**
 * _realloc - Reallocate memory block with specified size.
 * @ptr: Pointer to the memory block to be reallocated.
-* @old_size: Previous size of the memory block.
 * @new_size: New size of the memory block.
 * Return: A pointer to the reallocated memory block.
 */
