@@ -8,12 +8,12 @@
 
 char *get_env_variable(const char *var)
 {
-	size_t len = strlen(var);
+	size_t len = _strlen(var);
 	int i;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(var, environ[i], len) == 0 && environ[i][len] == '=')
+		if (_strncmp(var, environ[i], len) == 0 && environ[i][len] == '=')
 			return (&environ[i][len + 1]);
 	}
 	return (NULL);

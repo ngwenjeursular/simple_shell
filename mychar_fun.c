@@ -1,15 +1,23 @@
 #include "shell.h"
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _memset - fills a specified mem region with a givn value
+ * @dest: destination
+ * @value: one that fills
+ * @n: number of the bytes to be filled
+ * Return: Nothing
  */
-int _putchar(char c)
+void *_memset(void *dest, int value, size_t n)
 {
-	return (write(1, &c, 1));
+	unsigned char *p = dest;
+
+	while (n > 0)
+	{
+		*p = (unsigned char)value;
+		p++;
+		n--;
+	}
+	return (dest);
 }
 
 /**
@@ -45,7 +53,7 @@ char *_strncpy(char *dest, char *src, int n)
 *@s: shows input string
 *Return: length of string
 */
-int _strlen(char *s)
+int _strlen(const char *s)
 {
 	int length = 0;
 
@@ -90,24 +98,4 @@ int _atoi(char *s)
 		m /= 10;
 	}
 	return (oi * pn);
-}
-/**
-* _puts - prints a string, followed by a new line.
-*@str: input string
-*Return: no return
-*/
-void _puts(char *str)
-{
-	int length = 0;
-
-	while (length >= 0)
-	{
-		if (str[length] == '\0')
-		{
-			_putchar('\n');
-			break;
-		}
-		_putchar(str[length]);
-		length++;
-	}
 }

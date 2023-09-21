@@ -17,22 +17,6 @@
 #define MAX_PATH_LENGTH 1024
 #define BUFFER_SIZE 1024
 
-/* custom utility functions*/
-int _putchar(char c);
-char *_strncpy(char *dest, char *src, int n);
-int _atoi(char *s);
-void _puts(char *str);
-int _strlen(char *s);
-int _strncmp(const char *s1, const char *s2, size_t n);
-int _isalpha(int c);
-void reverse_array(int *a, int n);
-int intlen(int num);
-char *_itoa(unsigned int n);
-char *_strcat(char *dest, char *src);
-char *_strcpy(char *dest, char *src);
-char *_strchr(char *s, char c);
-int _strcmp(char *s1, char *s2)
-char *_strdup(char *str);
 
 /*writes.c*/
 void _puts(const char *str);
@@ -97,9 +81,9 @@ int handle_unsetenv(char **args);
 /* memory management.c */
 void *fill_an_array(void *a, int el, size_t len);
 void free_all(char **cmd, char *line);
-void *_calloc(size_t size);
-char *_memcpy(char *dest, const char *src, size_t n);
-void *_realloc(void *ptr, size_t old_size, size_t new_size);
+void *_calloc(unsigned int size);
+char *_memcpy(char *dest, char *src, unsigned int n);
+void *_realloc(void *ptr, size_t new_size);
 
 /* tokenizer.c */
 char **tokenize(char *lineptr);
@@ -107,7 +91,24 @@ char **tokenize(char *lineptr);
 /* getline */
 char *_getline_command(void);
 
-/* hashtag handle */
-void hashtag_handle(char *inputString);
+/*more_fun.c*/
+char *_strcat(char *dest, const char *src);
+char *_strcpy(char *dest, const char *src);
+char *_strchr(char *s, char c);
+int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
+
+/*more_mychar_fun.c*/
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _isalpha(int c);
+void reverse_array(char *a, int n);
+int intlen(int num);
+char *_itoa(unsigned int n);
+
+/*mychar_fun.c*/
+char *_strncpy(char *dest, char *src, int n);
+int _strlen(const char *s);
+int _atoi(char *s);
+void *_memset(void *dest, int value, size_t n);
 
 #endif

@@ -51,15 +51,15 @@ int _isalpha(int c)
 * @n: number of elements of the array
 * Return: no return
 */
-void reverse_array(int *a, int n)
+void reverse_array(char *a, int n)
 {
 	int left = 0;
 	int right = n - 1;
+	char temp;
 
 	while (left < right)
 	{
-		/*Swap elements at left and right indices*/
-		int temp = a[left];
+		temp = a[left];
 
 		a[left] = a[right];
 		a[right] = temp;
@@ -107,7 +107,7 @@ char *_itoa(unsigned int n)
 		i++;
 	}
 	s[i] = (n % 10) + '0';
-	array_rev(s, len);
+	reverse_array(s, len);
 	s[i + 1] = '\0';
 	return (s);
 }

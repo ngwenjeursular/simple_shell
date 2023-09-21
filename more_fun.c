@@ -1,10 +1,12 @@
+#include "shell.h"
+
 /**
 * _strcat - joins the first string with second string.
 * @dest: shows the destination.
 * @src: shows the source.
 * Return: pointer to dest.
 */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
 	char *ptr = dest;
 
@@ -29,7 +31,7 @@ char *_strcat(char *dest, char *src)
 *@src: source
 *Return: the pointer to dest
 */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	int count = 0;
 
@@ -93,14 +95,13 @@ char *_strdup(char *str)
 		return (NULL);
 	}
 	/*allocation of memory for the duplicated string*/
-	duplicate = (char *)malloc(strlen(str) + 1);
+	duplicate = (char *)malloc(_strlen(str) + 1);
 
 	if (duplicate == NULL)
 	{
 		return (NULL);
 	}
-	/*copy the string to newly allocated memory*/
-	strcpy(duplicate, str);
+	_strcpy(duplicate, str);
 	return (duplicate);
 }
 

@@ -22,18 +22,17 @@ char **parse_input(char *user_Response)
 
 	while (token != NULL)
 	{
-		args[no_of_args] = strdup(token);
+		args[no_of_args] = _strdup(token);
 		if (args[no_of_args] == NULL)
 		{
 			perror("memory allocation failed");
 			exit(EXIT_FAILURE);
 		}
 		no_of_args++;
-
 		if (no_of_args >= max_args)
 		{
 			max_args += MAX_NO_ARGS;
-			args = realloc(args, max_args * sizeof(char *));
+			args = _realloc(args, max_args * sizeof(char *));
 			if (args == NULL)
 			{
 				perror("mem allocation error");

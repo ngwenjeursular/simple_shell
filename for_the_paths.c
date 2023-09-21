@@ -8,7 +8,7 @@
 
 void execute_command(char **args)
 {
-	if (strchr(args[0], '/') != NULL)
+	if (_strchr(args[0], '/') != NULL)
 		execute_full_path(args);
 	else
 		execute_in_path(args);
@@ -48,7 +48,7 @@ void execute_in_path(char **args)
 	{
 		path = ".";
 	}
-	strncpy(path_copy, path, sizeof(path_copy));
+	_strncpy(path_copy, path, sizeof(path_copy));
 	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
@@ -74,6 +74,6 @@ void execute_in_path(char **args)
 		_puts("1: ");
 		_puts(args[0]);
 		_puts(": not found\n");
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
 }
