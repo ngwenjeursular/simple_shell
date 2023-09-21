@@ -24,7 +24,7 @@ char **parse_input(char *user_Response)
 
 	while (token != NULL)
 	{
-		args[no_of_args] = _strdup(token);
+		args[no_of_args] = strdup(token);
 		if (args[no_of_args] == NULL)
 		{
 			perror("memory allocation failed");

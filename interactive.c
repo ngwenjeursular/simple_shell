@@ -7,7 +7,7 @@
 
 void interactive_mode(void)
 {
-	char *user_Response;
+	char *user_Response = NULL;
 	char **args;
 
 	while (true)

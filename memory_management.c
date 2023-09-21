@@ -3,13 +3,14 @@
 /**
  **_realloc -  Reallocates A Memory Block Using Malloc And Free
  *@ptr: Pointer
- *@old_size: Previous Size Of The Pointer
  *@new_size: New Size Of The Pointer
  *Return: Void Pointer Rellocated Memory
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int new_size)
 {
 	void *result;
+	size_t old_size;
+	size_t copy_size;
 
 	if (new_size == old_size)
 		return (ptr);
@@ -23,6 +24,9 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (NULL);
 	if (ptr == NULL)
 	{
+		old_size = sizeof(char *) * MAX_NO_ARGS;
+		copy_size = old_size < new_size ? old_size : new_size;
+		_memcpy(result, ptr, copy_size);
 		fill_an_array(result, '\0', new_size);
 		free(ptr);
 	}

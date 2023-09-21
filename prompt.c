@@ -7,7 +7,7 @@
 char *display_prompt(void)
 {
 	char *prompt = "#cisfun$ ";
-	char *user_Response;
+	char *user_Response = NULL;
 	size_t len = 0;
 	ssize_t nchars_read;
 
@@ -27,11 +27,6 @@ char *display_prompt(void)
 		_puts("Exiting...\n");
 		free(user_Response);
 		exit(EXIT_SUCCESS);
-	}
-
-	if (user_Response[nchars_read - 1] == '\n')
-	{
-		user_Response[nchars_read - 1] = '\0';
 	}
 
 	return (user_Response);
