@@ -1,66 +1,22 @@
 #include "shell.h"
-
 /**
-* _getline - Read a line of input from the user via stdin.
-* Return: The input line as a string
-*/
-char *_getline()
-{
-	int i, bufferSize = BUFSIZ, readCount;
-	char currentChar = 0;
-	char *inputBuffer;
+ * _getline_command -  Takes the  inputs
+ * Return: The input.
+ */
 
-	inputBuffer = malloc(bufferSize);
-	if (inputBuffer == NULL)
+char *_getline_command(void)
+{
+	char *lineptr = NULL;
+	size_t charter_user = 0;
+
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
+
+	if (getline(&lineptr, &charter_user, stdin) == -1)
 	{
-		free(inputBuffer);
+		free(lineptr);
 		return (NULL);
 	}
 
-	for (i = 0; currentChar != EOF && currentChar != '\n'; i++)
-	{
-		fflush(stdin); /* to avoid unexpected buffer behaviour */
-		readCount = read(STDIN_FILENO, &currentChar, 1);
-		if (readCount == 0)
-		{
-			free(inputBuffer);
-			exit(EXIT_SUCCESS);
-		}
-		inputBuffer[i] = currentChar;
-		if (inputBuffer[0] == '\n')
-		{
-			free(inputBuffer);
-			return ("\0");
-		}
-		if (i >= bufferSize)
-		{
-			inputBuffer = _realloc(inputBuffer, bufferSize, bufferSize + 1);
-			if (inputBuffer == NULL)
-			{
-				return (NULL);
-			}
-		}
-	}
-	inputBuffer[i] = '\0';
-	hashtag_handle(inputBuffer);
-	return (inputBuffer);
-}
-
-/**
-* hashtag_handle - Remove everything after the first '#' character in  a str.
-* @inputString: The input string to process.
-* Return: nothing.
-*/
-void hashtag_handle(char *inputString)
-{
-	int i;
-
-	for (i = 0; inputString[i] != '\0'; i++)
-	{
-		if (inputString[i] == '#')
-		{
-			inputString[i] = '\0';
-			break;
-		}
-	}
+	return (lineptr);
 }
