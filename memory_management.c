@@ -12,8 +12,6 @@ void *_realloc(void *ptr, unsigned int new_size)
 	size_t old_size;
 	size_t copy_size;
 
-	if (new_size == old_size)
-		return (ptr);
 	if (new_size == 0 && ptr)
 	{
 		free(ptr);
@@ -22,17 +20,12 @@ void *_realloc(void *ptr, unsigned int new_size)
 	result = malloc(new_size);
 	if (result == NULL)
 		return (NULL);
-	if (ptr == NULL)
+	if (ptr != NULL)
 	{
 		old_size = sizeof(char *) * MAX_NO_ARGS;
 		copy_size = old_size < new_size ? old_size : new_size;
 		_memcpy(result, ptr, copy_size);
 		fill_an_array(result, '\0', new_size);
-		free(ptr);
-	}
-	else
-	{
-		_memcpy(result, ptr, old_size);
 		free(ptr);
 	}
 	return (result);

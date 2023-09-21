@@ -83,7 +83,7 @@ void *fill_an_array(void *a, int el, unsigned int len);
 void free_all(char **cmd, char *line);
 void *_calloc(unsigned int size);
 char *_memcpy(char *dest, char *src, unsigned int n);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int new_size);
 
 /* tokenizer.c */
 char **tokenize(char *lineptr);
