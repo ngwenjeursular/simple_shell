@@ -1,79 +1,67 @@
 #include "shell.h"
 
 /**
-* free_all - Free memory for an array of strings and a string.
-* @cmd: Array of strings.
-* @line: A string.
-* Return: nothing
-*/
-void free_all(char **cmd, char *line)
-{
-	free(cmd);
-	free(line);
-}
-
-/**
-* _calloc - Allocate memory for an array and initialize with null bytes.
-* @size: Size of the memory block to allocate.
-*
-* Return: A pointer to the allocated memory block.
-*/
-void *_calloc(size_t size)
-{
-	void *block = malloc(size);
-
-	if (block == NULL)
-		return (NULL);
-
-	_memset(block, 0, size);
-	return (block);
-}
-
-/**
-* _realloc - Reallocate memory block with specified size.
-* @ptr: Pointer to the memory block to be reallocated.
-* @new_size: New size of the memory block.
-* Return: A pointer to the reallocated memory block.
-*/
-void *_realloc(void *ptr, size_t new_size)
+ **_realloc -  Reallocates A Memory Block Using Malloc And Free
+ *@ptr: Pointer
+ *@new_size: New Size Of The Pointer
+ *Return: Void Pointer Rellocated Memory
+ */
+void *_realloc(void *ptr, unsigned int new_size)
 {
 	void *result;
 	size_t old_size;
 	size_t copy_size;
 
+	if (new_size == old_size)
+		return (ptr);
 	if (new_size == 0 && ptr)
 	{
 		free(ptr);
 		return (NULL);
 	}
-
 	result = malloc(new_size);
-
 	if (result == NULL)
 		return (NULL);
-
-	if (ptr != NULL)
+	if (ptr == NULL)
 	{
 		old_size = sizeof(char *) * MAX_NO_ARGS;
 		copy_size = old_size < new_size ? old_size : new_size;
 		_memcpy(result, ptr, copy_size);
+		fill_an_array(result, '\0', new_size);
 		free(ptr);
 	}
-
-
+	else
+	{
+		_memcpy(result, ptr, old_size);
+		free(ptr);
+	}
 	return (result);
+
+}
+/**
+ * free_all - Free Array Of Char Pointer And Char Pointer
+ * @cmd:Array Pointer
+ * @line:Char Pointer
+ * Return: Void
+ */
+void free_all(char **cmd, char *line)
+{
+	free(cmd);
+	free(line);
+	cmd = NULL;
+	line = NULL;
 }
 
 /**
-* _memcpy - Copy bytes from source to destination.
-* @dest: Destination pointer.
-* @src: Source pointer.
-* @n: Number of bytes to copy.
-* Return: A pointer to the destination.
-*/
-char *_memcpy(char *dest, const char *src, size_t n)
+ * _memcpy - Copy Byte From Source To Destination
+ * @dest: Destination Pointer
+ * @src: Source Pointer
+ * @n: Size (How Much You Will Copy)
+ *Return: Void Pointer
+ */
+char *_memcpy(char *dest, char *src, unsigned int n)
 {
-	size_t i;
+	unsigned int i;
 
 	for (i = 0; i < n; i++)
 	{
@@ -81,25 +69,44 @@ char *_memcpy(char *dest, const char *src, size_t n)
 	}
 	return (dest);
 }
-
 /**
-* fill_an_array - Fill an array with a constant byte.
-* @a: A pointer to the memory block to be filled.
-* @el: An integer representing the byte to fill the array with.
-* @len: The number of elements in the array.
-* Return: A pointer to the filled memory block.
-*/
-void *fill_an_array(void *a, int el, size_t len)
+ * fill_an_array - Fill An Array By Constant Byte
+ * @a:Void Pointer
+ * @el: Int
+ * @len:Length Int
+ *Return: Void Pointer
+ */
+void *fill_an_array(void *a, int el, unsigned int len)
 {
-	char *ptr = a;
-	size_t i = 0;
+	char *p = a;
+	unsigned int i = 0;
 
 	while (i < len)
 	{
-		*ptr = (char)el; /* fill each element with the specified byte*/
-		ptr++;
+		*p = el;
+		p++;
 		i++;
 	}
+	return (a);
+}
+/**
+ * _calloc -  Allocates Memory For An Array, Using Malloc.
+ * @size: Size
+ * Return: Void Pointer
+ */
+void *_calloc(unsigned int size)
+{
+	char *a;
+	unsigned int i;
 
+	if (size == 0)
+	return (NULL);
+	a = malloc(size);
+	if (a == NULL)
+	return (NULL);
+	for (i = 0; i < size; i++)
+	{
+		a[i] = '\0';
+	}
 	return (a);
 }

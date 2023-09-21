@@ -17,6 +17,7 @@
 #define MAX_PATH_LENGTH 1024
 #define BUFFER_SIZE 1024
 
+
 /*writes.c*/
 void _puts(const char *str);
 int _putchar(char c);
@@ -80,18 +81,15 @@ int handle_unsetenv(char **args);
 /* memory management.c */
 void *fill_an_array(void *a, int el, size_t len);
 void free_all(char **cmd, char *line);
-void *_calloc(size_t size);
-char *_memcpy(char *dest, const char *src, size_t n);
+void *_calloc(unsigned int size);
+char *_memcpy(char *dest, char *src, unsigned int n);
 void *_realloc(void *ptr, size_t new_size);
 
-/* _strtok.c */
-int split_line(char *line, char delim, char *tokens[], int max_tokens);
+/* tokenizer.c */
+char **tokenize(char *lineptr);
 
 /* getline */
-char *_getline(void);
-
-/* hashtag handle */
-void hashtag_handle(char *inputString);
+char *_getline_command(void);
 
 /*more_fun.c*/
 char *_strcat(char *dest, const char *src);
