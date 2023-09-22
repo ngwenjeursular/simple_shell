@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * _memset - fills a specified mem region with a givn value
@@ -53,7 +53,7 @@ char *_strncpy(char *dest, char *src, int n)
 *@s: shows input string
 *Return: length of string
 */
-int _strlen(char *s)
+int _strlen(const char *s)
 {
 	int length = 0;
 
@@ -98,16 +98,4 @@ int _atoi(char *s)
 		m /= 10;
 	}
 	return (oi * pn);
-}
-
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
 }

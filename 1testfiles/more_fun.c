@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
 * _strcat - joins the first string with second string.
@@ -6,7 +6,7 @@
 * @src: shows the source.
 * Return: pointer to dest.
 */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, const char *src)
 {
 	char *ptr = dest;
 
@@ -31,7 +31,7 @@ char *_strcat(char *dest, char *src)
 *@src: source
 *Return: the pointer to dest
 */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	int count = 0;
 
@@ -104,3 +104,4 @@ char *_strdup(char *str)
 	_strcpy(duplicate, str);
 	return (duplicate);
 }
+

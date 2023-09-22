@@ -1,33 +1,29 @@
-#include "shell.h"
+#include "main.h"
 
 /**
- * display_prompt - func to display prompt
- * Return: pointer to a character
+ * prompt - Display Shell Prompt
  */
-char *display_prompt(void)
+void prompt(void)
 {
-	char *prompt = "#cisfun$ ";
-	char *user_Response = NULL;
-	size_t len = 0;
-	ssize_t nchars_read;
+	_PRINT("$ ");
+}
+/**
+ * print_error - Display Error Based on Command and How Many Time Shell Looped
+ * @input:User Input
+ * @counter:Simple Shell Count Loop
+ * @argv:Program Name
+ * Return: Void
+ */
+void print_error(char *input, int counter, char **argv)
+{
+	char *er;
 
-	if (isatty(STDIN_FILENO))
-	{
-		_puts(prompt);
-	}
-	nchars_read = getline(&user_Response, &len, stdin);
-
-	if (nchars_read == -1 ? (perror("getline"), free(user_Response), 1) : 0)
-	{
-		return (NULL);
-	}
-
-	if (nchars_read == 0)
-	{
-		_puts("Exiting...\n");
-		free(user_Response);
-		exit(EXIT_SUCCESS);
-	}
-
-	return (user_Response);
+	_PRINT(argv[0]);
+	_PRINT(": ");
+	er = _itoa(counter);
+	_PRINT(er);
+	free(er);
+	_PRINT(": ");
+	_PRINT(input);
+	_PRINT(": not found\n");
 }
