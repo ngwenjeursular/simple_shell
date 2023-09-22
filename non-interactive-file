@@ -30,9 +30,11 @@ void non_interactive_mode(void)
 		execute(args);
 		free(args);
 	}
-	free(user_Response);
-	for (i = 0; i < **args; i++)
+
+	for (i = 0; args[i] != NULL; i++)
 	{
 		free(args[i]);
+		free(user_Response);
 	}
+
 }

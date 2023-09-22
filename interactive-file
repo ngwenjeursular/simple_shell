@@ -9,6 +9,7 @@ void interactive_mode(void)
 {
 	char *user_Response = NULL;
 	char **args;
+/*	int i;*/
 
 	while (true)
 	{
@@ -21,13 +22,24 @@ void interactive_mode(void)
 			free(args);
 			continue;
 		}
-		if (user_Response[_strlen(user_Response) - 1] == '\n')
-			user_Response[_strlen(user_Response) - 1] = '\0';
+		/*if (user_Response[_strlen(user_Response) - 1] == '\n')
+			user_Response[_strlen(user_Response) - 1] = '\0';*/
 
 		if (!handle_builtin(args))
+		{
 			execute(args);
+/*			free(args);*/
+		}
 
 		free(user_Response);
 		free(args);
 	}
+	free(user_Response);
+	free(args);
+/*	for (i = 0; args[i] != NULL; i++)
+	{
+		free(args[i]);
+		free(user_Response);
+	}
+	free_args(args);*/
 }
