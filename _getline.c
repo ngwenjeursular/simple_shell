@@ -6,16 +6,17 @@
 */
 char *_getline(void)
 {
-int i, buffsize = BUFSIZE, rd;
-char c = 0;
-char *buff = malloc(buffsize);
+	int i, buffsize = BUFSIZE, rd;
+	char c = 0;
+	char *buff;
 
+	buff = malloc(buffsize);
 	if (buff == NULL)
 	{
+		perror("malloc");
 		free(buff);
 		return (NULL);
 	}
-
 	for (i = 0; c != EOF && c != '\n'; i++)
 	{
 		fflush(stdin);
@@ -36,6 +37,8 @@ char *buff = malloc(buffsize);
 			buff = _realloc(buff, buffsize, buffsize + 1);
 			if (buff == NULL)
 			{
+				perror("_realloc");
+				free(buff);
 				return (NULL);
 			}
 		}
