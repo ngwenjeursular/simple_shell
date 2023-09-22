@@ -1,8 +1,0 @@
-#Ignore the "TEST_SUITES" directory
-TEST_SUITES/
-
-#Ignore the "allowed_functions" file
-allowed_functions
-
-#Ignore the "runchecker.bash" file
-runchecker.bash
