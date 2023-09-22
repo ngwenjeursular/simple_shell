@@ -46,29 +46,6 @@ int _isalpha(int c)
 }
 
 /**
-* reverse_array - reverse the content of an array
-* @a: array
-* @n: number of elements of the array
-* Return: no return
-*/
-void reverse_array(char *a, int n)
-{
-	int left = 0;
-	int right = n - 1;
-	char temp;
-
-	while (left < right)
-	{
-		temp = a[left];
-
-		a[left] = a[right];
-		a[right] = temp;
-
-		left++;
-		right--;
-	}
-}
-/**
  * intlen - Determine Length Of Int
  * @num: Given Int
  * Return: Length Of Int
@@ -84,9 +61,8 @@ int intlen(int num)
 	}
 	return (len);
 }
-
 /**
-* _itoa - Convert Integer To Char
+ * _itoa - Convert Integer To Char
  * @n: Int To Convert
  * Return: Char Pointer
  */
@@ -107,7 +83,26 @@ char *_itoa(unsigned int n)
 		i++;
 	}
 	s[i] = (n % 10) + '0';
-	reverse_array(s, len);
+	array_rev(s, len);
 	s[i + 1] = '\0';
 	return (s);
+}
+
+/**
+ *  array_rev - Reverse Array
+ * @arr:Array To Reverse
+ * @len:Length Of Array
+ * Return: Void(Reverse Array)
+ */
+void array_rev(char *arr, int len)
+{
+	int i;
+	char tmp;
+
+	for (i = 0; i < (len / 2); i++)
+	{
+		tmp = arr[i];
+		arr[i] = arr[(len - 1) - i];
+		arr[(len - 1) - i] = tmp;
+	}
 }

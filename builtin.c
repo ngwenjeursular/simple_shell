@@ -130,19 +130,19 @@ int echo_bul(char **cmd, int st)
 	if (_strncmp(cmd[1], "$?", 2) == 0)
 	{
 		print_number_in(st);
-		_PRINT("\n");
+		PRINT("\n");
 	}
 	else if (_strncmp(cmd[1], "$$", 2) == 0)
 	{
 		print_number(pid);
-		_PRINT("\n");
+		PRINT("\n");
 
 	}
 	else if (_strncmp(cmd[1], "$PATH", 5) == 0)
 	{
 		path = _getenv("PATH");
-		_PRINT(path);
-		_PRINT("\n");
+		PRINT(path);
+		PRINT("\n");
 		free(path);
 
 	}

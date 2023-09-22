@@ -1,103 +1,85 @@
 #include "main.h"
-
 /**
- * _memset - fills a specified mem region with a givn value
- * @dest: destination
- * @value: one that fills
- * @n: number of the bytes to be filled
- * Return: Nothing
+ * _strncpy - copie a string
+ * @dest:char
+ *  @src:char
+ * @n:int
+ * Return:char
  */
-void *_memset(void *dest, int value, size_t n)
-{
-	unsigned char *p = dest;
 
-	while (n > 0)
-	{
-		*p = (unsigned char)value;
-		p++;
-		n--;
-	}
-	return (dest);
-}
-
-/**
-* _strncpy - copy source string to destination string
-* @dest: shows destination
-* @src: shows source
-* @n: shows integer
-* Return: (dest)
-*/
 char *_strncpy(char *dest, char *src, int n)
 {
-	char *ptr = dest;
+	int i = 0;
 
-	/*Copy at most n characters from source to destination*/
-	while (*src != '\0' && n > 0)
+	while (i < n && *(src + i))
 	{
-		*ptr = *src;
-		ptr++;
-		src++;
-		n--;
+		*(dest + i) = *(src + i);
+		i++;
 	}
-	/* Fill the remaining space in destination with null bytes*/
-	while (n > 0)
+	while (i < n)
 	{
-		*ptr = '\0';
-		ptr++;
-		n--;
+		*(dest + i) = '\0';
+		i++;
 	}
 	return (dest);
 }
+
 /**
-* _strlen - return the length of a string
-*@s: shows input string
-*Return: length of string
-*/
+ * _strlen - lenght of string
+ * @s:char
+ * Return:int
+ */
 int _strlen(char *s)
 {
-	int length = 0;
+	int i;
 
-	while (*(s + length) != '\0')
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		length++;
+		continue;
 	}
-
-	return (length);
+	return (i);
 }
 
 /**
-* _atoi - converts a string to integers
-* @s: shows input string
-*
-*Return: integer
-*/
+ * _atoi - convert to a int
+ * @s:string
+ * Return:int
+ */
 int _atoi(char *s)
 {
-	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
+	int i, j, n, x;
 
-	while (*(s + count) != '\0')
+	i = n = 0;
+	x = 1;
+
+	while ((s[i] < '0' || s[i] > '9') && (s[i] != '\0'))
 	{
-		if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
-			break;
-
-		if (*(s + count) == '-')
-			pn *= -1;
-
-		if ((*(s + count) >= '0') && (*(s + count) <= '9'))
-		{
-			if (size > 0)
-				m *= 10;
-			size++;
-		}
-		count++;
+		if (s[i] == '-')
+			x *= -1;
+		i++;
 	}
-
-	for (i = count - size; i < count; i++)
+	j = i;
+	while ((s[j] >= '0') && (s[j] <= '9'))
 	{
-		oi = oi + ((*(s + i) - 48) * m);
-		m /= 10;
+		n = (n * 10) + x * ((s[j]) - '0');
+		j++;
 	}
-	return (oi * pn);
+	return (n);
+}
+/**
+ * _puts - print a string
+ * @str:pointer char
+ * return:void
+ */
+void _puts(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		_putchar(str[i]);
+	}
+	_putchar('\n');
 }
 
 /**

@@ -83,6 +83,6 @@ void signal_to_handel(int sig)
 {
 	if (sig == SIGINT)
 	{
-		_PRINT("\n$ ");
+		PRINT("\n$ ");
 	}
 }
